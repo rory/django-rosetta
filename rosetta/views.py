@@ -18,7 +18,10 @@ import datetime
 import unicodedata
 import hashlib
 import os
+import logging
 
+
+logger = logging.getLogger(__name__)
 
 def home(request):
     """
@@ -150,8 +153,9 @@ def home(request):
                             import uwsgi
                             # pretty easy right?
                             uwsgi.reload()
-                        except:
+                        except Exception as ex:
                             # we may not be running under uwsgi :P
+                            logging.error("Could not reload settings. Are we running under uwsgi? If not, then set ROSETTA_UWSGI_AUTO_RELOAD=False. Error:"+ex)
                             pass
 
                 except:
