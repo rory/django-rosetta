@@ -143,10 +143,7 @@ def home(request):
                         request.environ.get('mod_wsgi.process_group', None) and \
                         'SCRIPT_FILENAME' in request.environ and \
                         int(request.environ.get('mod_wsgi.script_reloading', '0')):
-                            try:
-                                os.utime(request.environ.get('SCRIPT_FILENAME'), None)
-                            except OSError:
-                                pass
+                            os.utime(request.environ.get('SCRIPT_FILENAME'), None)
                     # Try auto-reloading via uwsgi daemon reload mechanism
                     if rosetta_settings.UWSGI_AUTO_RELOAD:
                         try:
